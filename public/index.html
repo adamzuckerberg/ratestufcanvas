@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ratestuf canvas</title>
+  <script type="application/javascript">
+    function draw() {
+      var canvas = document.getElementById("ratestuf");
+      if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var radius = 70;
+
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle = 'green';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = '#003300';
+      ctx.stroke();
+      }
+    }
+  </script>
+</head>
+<body onload="draw();">
+<canvas id="ratestuf" width="350" height="350">
+</canvas>
+</body>
+<script>
+  var canvas = document.getElementById('ratestuf');
+</script>
+</html>
