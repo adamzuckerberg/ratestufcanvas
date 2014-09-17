@@ -3,31 +3,62 @@
 <head>
   <title>Ratestuf canvas</title>
   <script type="application/javascript">
+
+  var comparison = []
+
+  comparison[0] = {
+               "name": "Obama",
+               "itemId": 123,
+               "searchTerm": "Obama vs. Batman",
+               "xAxis": "evilness",
+               "xRating": .3,
+               "yAxis":"intelligence",
+               "yRating": .4 };
+
+
     function draw() {
-      var canvas = document.getElementById("ratestuf");
-      if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-        var centerX = canvas.width / 2;
-        var centerY = canvas.height / 2;
-        var radius = 70;
+      var canvas = document.createElement("canvas");
+      canvas.width = 1000;
+      canvas.height = 533;
 
 
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      ctx.fillStyle = 'green';
-      ctx.fill();
-      ctx.lineWidth = 5;
-      ctx.strokeStyle = '#003300';
-      ctx.stroke();
-      }
+      var ctx = canvas.getContext("2d");
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 20;
+
+      //Background
+      ctx.fillStyle = "#D6AD33";
+      ctx.fillRect(20,20,canvas.width,canvas.height);
+
+      // Rating
+
+      comparison.forEach( function(data){
+        ctx.beginPath();
+        ctx.arc(canvas.width * data.xRating ,
+                canvas.height * data.yRating,
+                radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = 'yellow';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#003300';
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.fillStyle = "black";
+        ctx.textAlign = 'center';
+        ctx.fillText(
+          data.name,
+          canvas.width * data.xRating,
+          canvas.height * data.yRating + 40);
+      })
+
+
+      document.getElementById('result').src = canvas.toDataURL();
     }
   </script>
 </head>
 <body onload="draw();">
-<canvas id="ratestuf" width="350" height="350">
-</canvas>
+<img src="" id="result">
 </body>
-<script>
-  var canvas = document.getElementById('ratestuf');
-</script>
 </html>
